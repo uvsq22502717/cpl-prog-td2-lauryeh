@@ -317,6 +317,38 @@ Après correction des tests, tous les cas passent avec succès (mvn clean test �
 1. Changez la représentation interne de la classe : seule la chaîne cryptée est stockée (plus la chaîne en clair).
     * effectuez les modifications nécessaires sans changer l'interface de la classe (les tests ne seront donc pas impactés).
 1.  Modifiez le POM pour intégrer la vérification des conventions de codage avec [`checkstyle`](http://maven.apache.org/plugins/maven-checkstyle-plugin/) en utilisant les conventions _Google_.
+mvn checkstyle:check
+
+[INFO] You have 0 Checkstyle violations.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  22.079 s
+[INFO] Finished at: 2025-10-06T11:34:44+02:00
+[INFO] ------------------------------------------------------------------------
 1.  Ajoutez une méthode `main` qui démontre quelques fonctionnalités de la classe, puis modifiez le POM pour que le jar généré soit exécgitutable (cf. [Apache Maven JAR Plugin](https://maven.apache.org/plugins/maven-jar-plugin/index.html))
 1.  Modifiez la méthode `main` pour que les différents affichages se fassent à l'aide de la bibliothèque de logging [`SLF4J`](http://www.sgulf4j.org/)
+ java -jar mvnjunit-1.0-SNAPSHOT.jar
+Chaîne en clair : PROGRAMMATION JAVA
+Chaîne cryptée : SURJUDPPDWLRQ MDYD
+Décryptage de SURJUDPPLWLRQ MDYD : PROGRAMMITION JAVA
+ // Méthode main pour démonstratio
+     public static void main(String[] args) {
+        // Démonstration avec "PROGRAMMATION JAVA"
+        ChaineCryptee c = ChaineCryptee.deEnClair("PROGRAMMATION JAVA", 3);
+        System.out.println("Chaîne en clair : " + c.decrypte());
+        System.out.println("Chaîne cryptée : " + c.crypte());
+
+        ChaineCryptee c2 = ChaineCryptee.deCryptee("SURJUDPPLWLRQ MDYD", 3);
+        System.out.println("Décryptage de SURJUDPPLWLRQ MDYD : " + c2.decrypte());
+    }
+
 1. En utilisant le plugin [assembly](https://maven.apache.org/plugins/maven-assembly-plugin/) (ou le plugin [shade](https://maven.apache.org/plugins/maven-shade-plugin/)), générez une archive du projet contenant ses dépendances (uber-jar)
+java -jar mvnjunit-uber.jar
+Chaîne en clair : PROGRAMMATION JAVA
+Chaîne cryptée : SURJUDPPDWLRQ MDYD
+Décryptage de SURJUDPPDWLRQ MDYD : PROGRAMMATION JAVA
+
+
+
+

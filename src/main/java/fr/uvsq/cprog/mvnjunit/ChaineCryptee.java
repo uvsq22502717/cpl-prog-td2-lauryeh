@@ -46,6 +46,29 @@ public class ChaineCryptee {
     private static String decrypterTexte(String texte, int decalage) {
         return crypterTexte(texte, 26 - (decalage % 26));
     }
+
+     // Méthode main pour démonstratio
+     public static void main(String[] args) {
+        String texte = "PROGRAMMATION JAVA";
+        int decalage = 3;
+    
+        // Création d'une instance
+        ChaineCryptee c = ChaineCryptee.deEnClair(texte, decalage);
+    
+        // Affichage du texte en clair
+        System.out.println("Chaîne en clair : " + texte);
+    
+        // Affichage du texte crypté
+        String cryptee = c.crypte();
+        System.out.println("Chaîne cryptée : " + cryptee);
+    
+        // Décryptage à partir du texte crypté généré
+        ChaineCryptee cDecrypte = ChaineCryptee.deCryptee(cryptee, decalage);
+        System.out.println("Décryptage de " + cryptee + " : " + cDecrypte.decrypte());
+    }
+    
+    
+    
 }
 
 
