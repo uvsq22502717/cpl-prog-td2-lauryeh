@@ -218,7 +218,22 @@ C:.
 1.  Ajoutez une classe `ChaineCryptee` et une classe `ChaineCrypteeTest` dans les répertoires et packages appropriés.
     Supprimez les classes d'exemple `App` et `AppTest`.
 1.  Énumérez une liste de cas de tests à réaliser en n'oubliant pas les cas d'erreur.
-    > RÉPONDRE ICI
+            Cas de tests à réaliser :
+        Cas normaux :
+        Chiffrer et déchiffrer "PROGRAMMATION" avec un décalage de 3.
+        Chiffrer et déchiffrer "JAVA" avec un décalage de 5.
+        Chiffrer et déchiffrer "PROGRAMMATION JAVA" avec un décalage de 3.
+        Cas limites :
+        Chaîne vide.
+        Chaîne avec un seul caractère.
+        Chaîne composée uniquement d'espaces.
+        Décalage = 0.
+        Décalage > 26 (vérification du comportement cyclique).
+        Cas d'erreur :
+        Chaîne null.
+        Décalage négatif.
+        Caractères non autorisés (chiffres, ponctuation, etc.).
+
 1.  Pour chaque cas de test,
     1. écrivez le test JUnit correspondant dans la classe de test,
     1. vérifiez qu’il échoue,
@@ -226,6 +241,8 @@ C:.
     1. vérifiez que le test passe,
     1. appliquez un étape de refactoring sur les tests et la classe si nécessaire.
 1.  Comment se comporte votre classe si la chaîne passée au constructeur est `null` ?
+
+
 Vous pouvez utiliser le débogueur pour identifier le problème (s'il y a un problème) au niveau de `crypte`.
     > RÉPONDRE ICI
     1. ajoutez un test pour prendre en compte la chaîne `null`,
