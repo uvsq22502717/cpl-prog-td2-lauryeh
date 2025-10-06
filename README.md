@@ -241,11 +241,78 @@ C:.
     1. vérifiez que le test passe,
     1. appliquez un étape de refactoring sur les tests et la classe si nécessaire.
 1.  Comment se comporte votre classe si la chaîne passée au constructeur est `null` ?
-
+    Si la chaîne passée au constructeur est null, la classe ChaineCryptee lève une exception de type IllegalArgumentException.
+    Ce comportement a été explicitement défini dans la méthode deEnClair(String s, int decalage) et vérifié par le test unitaire suivant :
+    // 7️⃣ Test avec chaîne null
+        @Test
+        void testNull() {
+            assertThrows(IllegalArgumentException.class, () -> {
+                ChaineCryptee.deEnClair(null, 3);
+            });
+        }
+    Ainsi, la classe ne crée pas d’objet avec une chaîne nulle et empêche l’exécution d’opérations de chiffrement ou déchiffrement invalides.
+    Ce choix permet de garantir la robustesse et la cohérence des objets créés.
 
 Vous pouvez utiliser le débogueur pour identifier le problème (s'il y a un problème) au niveau de `crypte`.
-    > RÉPONDRE ICI
+    Après exécution des tests et utilisation du débogueur, aucun problème n’a été détecté dans la méthode crypte.
+Le décalage des caractères est bien appliqué selon le chiffrement de César, les espaces et autres caractères non alphabétiques sont conservés, et les majuscules bouclent correctement de Z vers A.
+
+Les erreurs précédentes provenaient des chaînes attendues dans les tests (valeurs de référence incorrectes), et non de la méthode crypte.
+Après correction des tests, tous les cas passent avec succès (mvn clean test → BUILD SUCCESS).
+ mvn clean test
+[INFO] Scanning for projects...
+[INFO]
+[INFO] -----------------------< fr.uvsq.cprog:mvnjunit >-----------------------
+[INFO] Building mvnjunit 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- clean:3.1.0:clean (default-clean) @ mvnjunit ---
+[INFO] Deleting C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh\target
+[INFO]
+[INFO] --- resources:3.0.2:resources (default-resources) @ mvnjunit ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh\src\main\resources
+[INFO]
+[INFO] --- compiler:3.8.0:compile (default-compile) @ mvnjunit ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh\target\classes
+[INFO]
+[INFO] --- resources:3.0.2:testResources (default-testResources) @ mvnjunit ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh\src\test\resources
+[INFO]
+[INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ mvnjunit ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh\target\test-classes
+[INFO]
+[INFO] --- surefire:2.22.1:test (default-test) @ mvnjunit ---
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running fr.uvsq.cprog.mvnjunit.ChaineCrypteeTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 s - in fr.uvsq.cprog.mvnjunit.ChaineCrypteeTest
+[INFO]
+[INFO] Results:
+[INFO]
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.255 s
+[INFO] Finished at: 2025-10-06T11:13:10+02:00
+[INFO] ------------------------------------------------------------------------
+
     1. ajoutez un test pour prendre en compte la chaîne `null`,
+    // 7️⃣ Test avec chaîne null
+        @Test
+        void testNull() {
+            assertThrows(IllegalArgumentException.class, () -> {
+                ChaineCryptee.deEnClair(null, 3);
+            });
+        }
     1. si nécessaire, modifiez la classe pour faire passer le test
 1. Changez la représentation interne de la classe : seule la chaîne cryptée est stockée (plus la chaîne en clair).
     * effectuez les modifications nécessaires sans changer l'interface de la classe (les tests ne seront donc pas impactés).

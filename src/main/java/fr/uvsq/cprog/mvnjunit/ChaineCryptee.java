@@ -1,66 +1,53 @@
 package fr.uvsq.cprog.mvnjunit;
 
 public class ChaineCryptee {
-    private final String clair;
-    private final String crypte;
-    private final int decalage;
+    private String texteCrypte;
+    private int decalage;
 
-    private ChaineCryptee(String clair, String crypte, int decalage) {
-        this.clair = clair;
-        this.crypte = crypte;
+    private ChaineCryptee(String texteCrypte, int decalage) {
+        this.texteCrypte = texteCrypte;
         this.decalage = decalage;
     }
 
-    // Fabrique à partir d’une chaîne claire
-    public static ChaineCryptee deEnClair(String clair, int decalage) {
-        if (clair == null || decalage < 0)
-            throw new IllegalArgumentException("Chaîne nulle ou décalage négatif");
-        return new ChaineCryptee(clair.toUpperCase(), crypter(clair.toUpperCase(), decalage), decalage);
+    public static ChaineCryptee deEnClair(String texte, int decalage) {
+        if (texte == null) throw new IllegalArgumentException("Texte null interdit");
+        if (decalage < 0) throw new IllegalArgumentException("Décalage négatif interdit");
+        String crypte = crypterTexte(texte, decalage);
+        return new ChaineCryptee(crypte, decalage);
     }
 
-    // Fabrique à partir d’une chaîne déjà chiffrée
-    public static ChaineCryptee deCryptee(String crypte, int decalage) {
-        if (crypte == null || decalage < 0)
-            throw new IllegalArgumentException("Chaîne nulle ou décalage négatif");
-        return new ChaineCryptee(decrypter(crypte.toUpperCase(), decalage), crypte.toUpperCase(), decalage);
-    }
-
-    public String crypte() {
-        return crypte;
+    public static ChaineCryptee deCryptee(String texteCrypte, int decalage) {
+        if (texteCrypte == null) throw new IllegalArgumentException("Texte null interdit");
+        if (decalage < 0) throw new IllegalArgumentException("Décalage négatif interdit");
+        return new ChaineCryptee(texteCrypte, decalage);
     }
 
     public String decrypte() {
-        return clair;
+        return decrypterTexte(texteCrypte, decalage);
     }
 
-    private static String crypter(String texte, int decalage) {
-        StringBuilder sb = new StringBuilder();
-        for (char c : texte.toCharArray()) {
-            if (c >= 'A' && c <= 'Z') {
-                sb.append((char) ('A' + (c - 'A' + decalage) % 26));
-            } else if (c == ' ') {
-                sb.append(' ');
-            } else {
-                sb.append(c);
-            }
-        }
-        return sb.toString();
+    public String crypte() {
+        return texteCrypte;
     }
 
-    private static String decrypter(String texte, int decalage) {
-        StringBuilder sb = new StringBuilder();
+    // Fonctions utilitaires privées
+    private static String crypterTexte(String texte, int decalage) {
+        StringBuilder result = new StringBuilder();
         for (char c : texte.toCharArray()) {
             if (c >= 'A' && c <= 'Z') {
-                sb.append((char) ('A' + (c - 'A' - decalage + 26) % 26));
-            } else if (c == ' ') {
-                sb.append(' ');
+                result.append((char) ('A' + (c - 'A' + decalage) % 26));
             } else {
-                sb.append(c);
+                result.append(c);
             }
         }
-        return sb.toString();
+        return result.toString();
+    }
+
+    private static String decrypterTexte(String texte, int decalage) {
+        return crypterTexte(texte, 26 - (decalage % 26));
     }
 }
+
 
 
 
