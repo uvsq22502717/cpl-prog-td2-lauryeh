@@ -161,11 +161,60 @@ C:.
 1.  Ajoutez un fichier `.gitignore` adapté aux projets Maven (cf. [A collection of .gitignore templates](https://github.com/github/gitignore)) et ajoutez-y les fichiers et répertoires de votre IDE.
 1.  Quelle commande Maven permet de :
     1.  créer un `jar` du projet ?
-        > RÉPONDRE ICI
+        La commande Maven pour créer un JAR du projet est mvn package
+        [INFO] Building jar: C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh\target\mvnjunit-1.0-SNAPSHOT.jar
+        [INFO] ------------------------------------------------------------------------
+        [INFO] BUILD SUCCESS
+        [INFO] ------------------------------------------------------------------------
+        [INFO] Total time:  6.075 s
+        [INFO] Finished at: 2025-10-06T07:03:46+02:00
+        [INFO] ------------------------------------------------------------------------
+
     1. lancer les tests ?
-        > RÉPONDRE ICI
+        La commande Maven pour lancer les tests du projet est : mvn test
+         mvn test
+    [INFO] Scanning for projects...
+    [INFO]
+    [INFO] -----------------------< fr.uvsq.cprog:mvnjunit >-----------------------
+    [INFO] Building mvnjunit 1.0-SNAPSHOT
+    [INFO]   from pom.xml
+    [INFO] --------------------------------[ jar ]---------------------------------
+    [INFO]
+    [INFO] --- resources:3.0.2:resources (default-resources) @ mvnjunit ---
+    [INFO] Using 'UTF-8' encoding to copy filtered resources.
+    [INFO] skip non existing resourceDirectory C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh\src\main\resources
+    [INFO]
+    [INFO] --- compiler:3.8.0:compile (default-compile) @ mvnjunit ---
+    [INFO] Nothing to compile - all classes are up to date
+    [INFO]
+    [INFO] --- resources:3.0.2:testResources (default-testResources) @ mvnjunit ---
+    [INFO] Using 'UTF-8' encoding to copy filtered resources.
+    [INFO] skip non existing resourceDirectory C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh\src\test\resources
+    [INFO]
+    [INFO] --- compiler:3.8.0:testCompile (default-testCompile) @ mvnjunit ---
+    [INFO] Nothing to compile - all classes are up to date
+    [INFO]
+    [INFO] --- surefire:2.22.1:test (default-test) @ mvnjunit ---
+    [INFO]
+    [INFO] -------------------------------------------------------
+    [INFO]  T E S T S
+    [INFO] -------------------------------------------------------
+    [INFO] Running fr.uvsq.cprog.mvnjunit.AppTest
+    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.041 s - in fr.uvsq.cprog.mvnjunit.AppTest
+    [INFO]
+    [INFO] Results:
+    [INFO]
+    [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+    [INFO]
+    [INFO] ------------------------------------------------------------------------
+    [INFO] BUILD SUCCESS
+    [INFO] ------------------------------------------------------------------------
+    [INFO] Total time:  2.483 s
+    [INFO] Finished at: 2025-10-06T07:08:00+02:00
+
     1. supprimer tous les fichiers issus de la compilation ?
-        > RÉPONDRE ICI
+        La commande Maven pour supprimer tous les fichiers issus de la compilation est mvn clean
+
 1.  Ajoutez une classe `ChaineCryptee` et une classe `ChaineCrypteeTest` dans les répertoires et packages appropriés.
     Supprimez les classes d'exemple `App` et `AppTest`.
 1.  Énumérez une liste de cas de tests à réaliser en n'oubliant pas les cas d'erreur.
@@ -184,6 +233,6 @@ Vous pouvez utiliser le débogueur pour identifier le problème (s'il y a un pro
 1. Changez la représentation interne de la classe : seule la chaîne cryptée est stockée (plus la chaîne en clair).
     * effectuez les modifications nécessaires sans changer l'interface de la classe (les tests ne seront donc pas impactés).
 1.  Modifiez le POM pour intégrer la vérification des conventions de codage avec [`checkstyle`](http://maven.apache.org/plugins/maven-checkstyle-plugin/) en utilisant les conventions _Google_.
-1.  Ajoutez une méthode `main` qui démontre quelques fonctionnalités de la classe, puis modifiez le POM pour que le jar généré soit exécutable (cf. [Apache Maven JAR Plugin](https://maven.apache.org/plugins/maven-jar-plugin/index.html))
-1.  Modifiez la méthode `main` pour que les différents affichages se fassent à l'aide de la bibliothèque de logging [`SLF4J`](http://www.slf4j.org/)
+1.  Ajoutez une méthode `main` qui démontre quelques fonctionnalités de la classe, puis modifiez le POM pour que le jar généré soit exécgitutable (cf. [Apache Maven JAR Plugin](https://maven.apache.org/plugins/maven-jar-plugin/index.html))
+1.  Modifiez la méthode `main` pour que les différents affichages se fassent à l'aide de la bibliothèque de logging [`SLF4J`](http://www.sgulf4j.org/)
 1. En utilisant le plugin [assembly](https://maven.apache.org/plugins/maven-assembly-plugin/) (ou le plugin [shade](https://maven.apache.org/plugins/maven-shade-plugin/)), générez une archive du projet contenant ses dépendances (uber-jar)
