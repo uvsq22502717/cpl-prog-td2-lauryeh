@@ -27,20 +27,134 @@ Il pourra éventuellement être nécessaire de [configurer le proxy](http://mave
 À chaque étape, validez vos modifications avec `git` et si nécessaire, exécutez le cycle maven adapté pour vérifier vos manipulations.
 
 1.  Quelles conventions utilise Maven pour l’arborescence des répertoires ?
-    > RÉPONDRE ICI
+
+Maven suit une convention stricte pour l’organisation des répertoires du projet.
+
+Dans le project: 
+    PS C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh> tree /F
+Structure du dossier
+Le numéro de série du volume est 845F-DBC1
+C:.
+│   .gitignore
+│   pom.xml
+│   README.md
+│
+├───src
+│   ├───main
+│   │   └───java
+│   │       └───fr
+│   │           └───uvsq
+│   │               └───cprog
+│   │                   └───mvnjunit
+│   │                           App.java
+│   │
+│   └───test
+│       └───java
+│           └───fr
+│               └───uvsq
+│                   └───cprog
+│                       └───mvnjunit
+│                               AppTest.java
+│
+└───target
+    ├───classes
+    │   └───fr
+    │       └───uvsq
+    │           └───cprog
+    │               └───mvnjunit
+    │                       App.class
+    │
+    ├───generated-sources
+    │   └───annotations
+    ├───generated-test-sources
+    │   └───test-annotations
+    ├───maven-status
+    │   └───maven-compiler-plugin
+    │       ├───compile
+    │       │   └───default-compile
+    │       │           createdFiles.lst
+    │       │           inputFiles.lst
+    │       │
+    │       └───testCompile
+    │           └───default-testCompile
+    │                   createdFiles.lst
+    │                   inputFiles.lst
+    │
+    ├───surefire-reports
+    │       fr.uvsq.cprog.mvnjunit.AppTest.txt
+    │       TEST-fr.uvsq.cprog.mvnjunit.AppTest.xml
+    │
+    └───test-classes
+        └───fr
+            └───uvsq
+                └───cprog
+                    └───mvnjunit
+                            AppTest.class
+
 1.  Examinez le projet Maven ainsi que le fichier de description et répondez aux questions suivantes :
     1.  Dans quel répertoire se trouvent les fichiers sources du projet ? Les sources des tests ?
-        > RÉPONDRE ICI
+        
+        Les fichiers sources du projet se trouvent dans src/main/java et les sources des tests se trouvent dans src/test/java.
+
+    ├───src
+    │   ├───main
+    │   │   └───java
+    │   │       └───fr
+    │   │           └───uvsq
+    │   │               └───cprog
+    │   │                   └───mvnjunit
+    │   │                           App.java
+    │   │
+    │   └───test
+    │       └───java
+    │           └───fr
+    │               └───uvsq
+    │                   └───cprog
+    │                       └───mvnjunit
+    │                               AppTest.java
     1. Quelles sont les coordonnées du projet ?
-        > RÉPONDRE ICI
+
+    Les coordonnées du projet sont :
+    groupId : fr.uvsq.cprog
+    artifactId : mvnjunit
+    version : 1.0-SNAPSHOT
+        <groupId>fr.uvsq.cprog</groupId>
+        <artifactId>mvnjunit</artifactId>
+        <version>1.0-SNAPSHOT</version>
+
     1. À quoi sert la propriété `project.build.sourceEncoding` ?
-        > RÉPONDRE ICI
+        La propriété project.build.sourceEncoding sert à définir l'encodage des fichiers sources du projet.
+        Dans ce projet, elle est réglée sur UTF-8
+         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     1. Quelles versions des sources et de la JVM sont utilisés ?
-        > RÉPONDRE ICI
+        java -version
+        openjdk version "21.0.8" 2025-07-15 LTS
+        OpenJDK Runtime Environment Temurin-21.0.8+9 (build 21.0.8+9-LTS)
+        OpenJDK 64-Bit Server VM Temurin-21.0.8+9 (build 21.0.8+9-LTS, mixed mode, sharing)
+        PS C:\Users\User\Documents\uvsq\cp\TD2\cpl-prog-td2-lauryeh> javac -version
+        javac 21.0.8
+
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
+        Les versions des sources et de la JVM utilisées sont les suivantes : 
+        - Les sources et les fichiers compilés sont configurés pour Java 17 (maven.compiler.source et maven.compiler.target dans le POM). 
+        - La JVM installée sur la machine est OpenJDK 21 (java -version et javac -version).
+
+
+
     1. Quelle version de JUnit est configurée ? À quoi sert la balise `scope` ?
-        > RÉPONDRE ICI
+        La version de JUnit configurée dans le projet est la 5.10.2 (dernière version en octobre 2025).  
+        La balise <scope>test</scope> signifie que ces dépendances sont utilisées uniquement pour compiler et exécuter les tests, et ne sont pas incluses dans le fichier jar final.  
+        Pour JUnit 5, deux dépendances sont configurées : junit-jupiter-api pour écrire les tests et junit-jupiter-engine pour les exécuter.
+
     1. À quoi sert la section `pluginManagement` ?
-        > RÉPONDRE ICI
+            La section <pluginManagement> sert à gérer de manière centralisée les versions et la configuration des plugins Maven.  
+    Elle ne déclenche pas directement l'exécution des plugins, mais fournit les paramètres et les versions qui seront utilisés si un plugin est appelé dans <build><plugins> du projet ou de ses sous-projets.  
+    C'est un moyen de « verrouiller » les versions et la configuration des plugins pour l'ensemble du projet.
+
+
 1.  Modifiez la configuration du projet de la façon suivante :
     1.  fixez la version des sources et des .class pour utiliser la version 17 de Java
     1.  utilisez la dernière version stable de JUnit 4 (cf. [MVNRepository](https://mvnrepository.com/))
